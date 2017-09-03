@@ -1,0 +1,22 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: polls_development
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
+test:
+  <<: *default
+  database: polls_test
+
+production:
+  <<: *default
+  database: polls_production
+  username: polls
+  password: <%= ENV['POLLS_DATABASE_PASSWORD'] %>
