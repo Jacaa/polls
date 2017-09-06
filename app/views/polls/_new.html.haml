@@ -1,5 +1,6 @@
-= simple_form_for(@poll, html: {novalidate: 'novalidate'}) do |form|
+= simple_form_for(@poll, defaults: {label: false}, 
+                         html: {novalidate: 'novalidate', autocomplete: "off" }) do |form|
   = form.error_notification
-  = form.input :question, placeholder: "Write your question..."
+  = form.input :question, placeholder: "Write your question here"
   = form.input :answers, as: :array
   = form.button :submit, "Create poll"

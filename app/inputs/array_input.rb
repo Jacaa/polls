@@ -12,7 +12,8 @@ class ArrayInput < SimpleForm::Inputs::StringInput
                                  value: array_el, 
                                  name: "#{object_name}[#{attribute_name}][]", 
                                  class: "form-control", 
-                                 id: "poll_answers_#{number_of_input}"
+                                 id: "poll_answers_#{number_of_input}",
+                                 placeholder: "enter new answer..."
                                )
                          )
     end.join.html_safe
