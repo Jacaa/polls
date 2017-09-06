@@ -7,7 +7,7 @@ class PollsController < ApplicationController
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
       else
-        format.html { render 'home/index' }
+        format.js
       end
     end
   end

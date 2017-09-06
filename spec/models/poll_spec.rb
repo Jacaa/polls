@@ -45,6 +45,11 @@ RSpec.describe Poll do
     expect(@poll).to_not be_valid
   end
 
+  it "is not valid with blank answers" do
+    @poll.answers = ['   ','   ']
+    expect(@poll).to_not be_valid
+  end
+
   it "is not valid if has one non empty answer and one empty answer" do
     @poll.answers = [ "blue", ""]
     expect(@poll).to_not be_valid

@@ -1,0 +1,5 @@
+%ul
+  - @poll.errors.full_messages.each do |msg|
+    -# Remove word 'Answers' from the error message
+    - msg.slice!("Answers")
+    %li= msg

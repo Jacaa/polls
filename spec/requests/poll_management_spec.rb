@@ -16,9 +16,10 @@ RSpec.describe "Poll management" do
     it "with invalid attributes displays errors" do
       get "/"
       expect(response).to render_template(:index)
-      post "/polls", params: { poll: FactoryGirl.attributes_for(:invalid_poll) }
-      expect(response).to render_template(:index)
-      expect(response.body).to include("Please review the problems below:")
+      params = { poll: FactoryGirl.attributes_for(:invalid_poll) }
+      post "/polls", params: params, xhr: true
+      expect(response).to render_template(:create)
+      expect(response.body).to include("At least two possible answers are required")
     end
   end
 end
