@@ -4,7 +4,7 @@ FactoryGirl.define do
     answers [ "blue", "green" ]
     
     factory :invalid_poll do
-      answers [ "blue" ]
+      answers [ "","" ]
     end
   end
 end

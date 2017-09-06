@@ -13,5 +13,12 @@ RSpec.describe HomeController do
       get :index
       expect(response).to render_template(:index)
     end
+
+    it "assings @poll with two empty answers" do
+      get :index
+      poll = assigns(:poll)
+      expect(poll.answers).to eql(['',''])
+      expect(assigns(:poll)).to be_a(Poll)
+    end
   end
 end

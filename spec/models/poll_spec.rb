@@ -10,8 +10,18 @@ RSpec.describe Poll do
     expect(@poll).to be_valid
   end
 
+  it "is valid with more than two possible answers" do
+    @poll.answers << "yellow" << "black"
+    expect(@poll).to be_valid
+  end 
+  
+  it "is valid with two non empty answers and one or more empty" do
+    @poll.answers << "" << ""
+    expect(@poll).to be_valid
+  end
+  
   it "is not valid without a question" do
-    @poll.question = nil
+    @poll.question = ""
     expect(@poll).to_not be_valid
   end
   
@@ -20,14 +30,28 @@ RSpec.describe Poll do
     expect(@poll).to_not be_valid
   end
 
-  it "is not valid without an answer" do
-    @poll.answers = nil
+  it "is not valid with no answers" do
+    @poll.answers = []
     expect(@poll).to_not be_valid
   end
 
-  it "is not valid if answers length is less than 2" do
+  it "is not valid if has less than two possible answers" do
     @poll.answers = [ "blue" ]
     expect(@poll).to_not be_valid
   end
-  
+
+  it "is not valid with empty answers" do
+    @poll.answers = ['','']
+    expect(@poll).to_not be_valid
+  end
+
+  it "is not valid if has one non empty answer and one empty answer" do
+    @poll.answers = [ "blue", ""]
+    expect(@poll).to_not be_valid
+  end
+
+  it "is not valid if one of the answers is longer than 255" do
+    @poll.answers = [ "a"*256, "b"]
+    expect(@poll).to_not be_valid
+  end
 end

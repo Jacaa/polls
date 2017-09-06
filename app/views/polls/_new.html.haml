@@ -1,4 +1,4 @@
-= simple_form_for(Poll.new(answers: ['','']), html: {novalidate: 'novalidate'}) do |form|
+= simple_form_for(@poll, html: {novalidate: 'novalidate'}) do |form|
   = form.error_notification
   = form.input :question, placeholder: "Write your question..."
   = form.input :answers, as: :array

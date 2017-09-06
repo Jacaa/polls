@@ -1,4 +1,7 @@
 class ArrayInput < SimpleForm::Inputs::StringInput
+
+  # Source: https://railsguides.net/simple-form-array-text-input/
+  
   def input(wrapper_options)
     input_html_options[:type] ||= input_type
 
