@@ -5,7 +5,8 @@ class PollsController < ApplicationController
     @poll = Poll.new(poll_params)
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        notice = 'Poll was successfully created.'
+        format.html { redirect_to edit_poll_path(@poll), notice: notice }
       else
         format.js
       end
@@ -16,7 +17,11 @@ class PollsController < ApplicationController
   def show
     @poll = Poll.find(params[:id])
   end
-
+  
+  # GET /polls/:id/edit
+  def edit
+    @poll = Poll.find(params[:id])
+  end
   private
 
     def poll_params

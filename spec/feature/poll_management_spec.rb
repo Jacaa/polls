@@ -8,13 +8,13 @@ RSpec.feature "Poll management - User" do
     fill_in "poll_answers_1", with: "Blue"
     fill_in "poll_answers_2", with: "Green"
     click_button "Create poll"
-    page.has_content?("Poll was successfully created.")
+    expect(page).to have_text("Poll was successfully created.")
   end
 
   scenario "creates a new invalid poll", js: true do
     visit "/"
     fill_in "poll_question", with: ""
     click_button "Create poll"
-    page.has_content?("Question can't be blank")
+    expect(page).to have_text("Question can't be blank")
   end
 end

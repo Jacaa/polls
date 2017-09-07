@@ -7,9 +7,9 @@ RSpec.describe "Poll management" do
       get "/"
       expect(response).to render_template(:index)
       post "/polls", params: { poll: FactoryGirl.attributes_for(:poll) }
-      expect(response).to redirect_to assigns(:poll)
+      expect(response).to redirect_to edit_poll_path(assigns(:poll))
       follow_redirect!
-      expect(response).to render_template(:show)
+      expect(response).to render_template(:edit)
       expect(response.body).to include("Poll was successfully created.")
     end
 

@@ -18,6 +18,28 @@ RSpec.describe PollsController do
       expect(response).to render_template(:show)
     end
   end
+  
+  describe "GET #edit" do
+
+    before(:each) do
+      @poll = FactoryGirl.create(:poll)
+    end
+
+    it "returns http success" do
+      get :edit, params: { id: @poll.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the edit template" do
+      get :edit, params: { id: @poll.id }
+      expect(response).to render_template(:edit)
+    end
+
+    it "assigns @poll variable" do
+      get :edit, params: { id: @poll.id }
+      expect(assigns(:poll)).to eql(@poll)
+    end
+  end
 
   describe "POST #create" do
 
@@ -28,9 +50,9 @@ RSpec.describe PollsController do
         }.to change(Poll, :count).by(1)
       end
 
-      it "redirects to the poll" do
+      it "redirects to the poll edit page - voting" do
         post :create, params: { poll: FactoryGirl.attributes_for(:poll) }
-        expect(response).to redirect_to assigns(:poll)
+        expect(response).to redirect_to edit_poll_path(assigns(:poll))
       end
     end
 

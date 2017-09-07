@@ -1,0 +1,10 @@
+.container
+  .row
+    .text-center
+      %p.notice
+        = notice
+      .errors
+        = simple_form_for(@poll, defaults: { label: false }) do |form|
+          %h3= @poll.question
+          = form.input :answers, collection: @poll.answers, as: :radio_buttons
+          -# = form.button :submit, "Vote"
