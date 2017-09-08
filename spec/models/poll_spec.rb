@@ -11,7 +11,7 @@ RSpec.describe Poll do
   end
 
   it "is valid with more than two possible answers" do
-    @poll.answers << "yellow" << "black"
+    @poll.answers << "blue" << "black"
     expect(@poll).to be_valid
   end 
   
@@ -19,7 +19,7 @@ RSpec.describe Poll do
     @poll.answers << "" << ""
     expect(@poll).to be_valid
   end
-  
+
   it "is not valid without a question" do
     @poll.question = ""
     expect(@poll).to_not be_valid
@@ -58,5 +58,17 @@ RSpec.describe Poll do
   it "is not valid if one of the answers is longer than 255" do
     @poll.answers = [ "a"*256, "b"]
     expect(@poll).to_not be_valid
+  end
+
+  it "is not valid if has only two answers and they are equal" do
+    @poll.answers = [ "blue", "blue" ]
+    expect(@poll).to_not be_valid
+  end
+
+  it "initialize answers_with_values column" do
+    @poll.save
+    @poll.answers.each do |answer|
+      expect(@poll.answers_with_values[answer]).to eq(0)
+    end
   end
 end

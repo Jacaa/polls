@@ -1,2 +1,7 @@
 %p.notice
   = notice
+
+  - @poll.answers_with_values.each do |answer, value|
+    %h2
+      = answer
+      = value
