@@ -69,7 +69,7 @@ RSpec.describe PollsController do
       it "renders the :create (errors) template" do
         params = { poll: FactoryGirl.attributes_for(:invalid_poll) }
         post :create, params: params, xhr: true
-        expect(response).to render_template(:create)
+        expect(response).to render_template(partial: "_errors")
       end
     end
   end
@@ -106,7 +106,7 @@ RSpec.describe PollsController do
       it "renders the :update (errors) template" do
         answer = ""
         patch :update, params: { id: @id, poll: { answers: answer } }, xhr: true
-        expect(response).to render_template :update
+        expect(response).to render_template(partial: "_errors")
       end
     end
   end

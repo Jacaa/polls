@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "polls/edit.html.haml" do
   
-  it "displays the poll edit form - voting" do
-    poll = Poll.create(question: "What's your favourite color?",
-                       answers: [ "Blue", "Green", "Yellow"])
+  it "voting page" do
+    poll = FactoryGirl.create(:poll)
     assign(:poll, poll)
     render
     expect(rendered).to have_selector("form#edit_poll_#{poll.id}")

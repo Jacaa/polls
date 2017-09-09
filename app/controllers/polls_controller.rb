@@ -9,7 +9,7 @@ class PollsController < ApplicationController
         notice = 'Poll was successfully created.'
         format.html { redirect_to edit_poll_path(@poll), notice: notice }
       else
-        format.js
+        format.js { render partial: "errors" }
       end
     end
   end
@@ -28,7 +28,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       if choosen_answer.empty?
         @poll.errors.add(:answers, "You need to choose an answer")
-        format.js
+        format.js { render partial: "errors" }
       else
         @poll.answers_with_values[choosen_answer] += 1
         @poll.save
