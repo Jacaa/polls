@@ -54,7 +54,7 @@ RSpec.describe PollsController do
 
       it "redirects to the poll edit page - voting" do
         post :create, params: { poll: FactoryGirl.attributes_for(:poll) }
-        expect(response).to redirect_to edit_poll_path(assigns(:poll))
+        expect(response).to redirect_to voting_path(assigns(:poll))
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe PollsController do
       it "redirects to the :show page" do
         answer = "blue"
         patch :update, params: { id: @id, poll: { answers: answer } }
-        expect(response).to redirect_to @poll
+        expect(response).to redirect_to results_path(@poll)
       end
     end
 

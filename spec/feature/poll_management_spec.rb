@@ -27,14 +27,14 @@ RSpec.feature "Poll management - User" do
     end
 
     scenario "votes for one answer" do
-      visit "/polls/#{@poll.id}/edit"
+      visit "/#{@poll.id}/voting"
       choose "poll_answers_blue"
       click_button "Vote"
       expect(page).to have_text("blue 1")
     end
 
     scenario "votes for nothing", js: true do
-      visit "/polls/#{@poll.id}/edit"
+      visit "/#{@poll.id}/voting"
       click_button "Vote"
       expect(page).to have_text("You need to choose an answer")
     end

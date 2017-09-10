@@ -1,4 +1,4 @@
-= simple_form_for(@poll, remote: true, defaults: {label: false}, 
+= simple_form_for(@poll, url: root_path, remote: true, defaults: {label: false}, 
                          html: {novalidate: 'novalidate', autocomplete: "off" }) do |form|
   = form.error_notification
   = form.input :question, placeholder: "Write your question here"

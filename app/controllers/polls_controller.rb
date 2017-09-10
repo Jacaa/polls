@@ -7,7 +7,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       if @poll.save
         notice = 'Poll was successfully created.'
-        format.html { redirect_to edit_poll_path(@poll), notice: notice }
+        format.html { redirect_to voting_path(@poll), notice: notice }
       else
         format.js { render partial: "errors" }
       end
@@ -32,7 +32,7 @@ class PollsController < ApplicationController
       else
         @poll.answers_with_values[choosen_answer] += 1
         @poll.save
-        format.html { redirect_to @poll }
+        format.html { redirect_to results_path(@poll) }
       end
     end
   end
