@@ -31,6 +31,11 @@ RSpec.feature "Poll management - User" do
       choose "poll_answers_blue"
       click_button "Vote"
       expect(page).to have_text("blue 1")
+      # Try to vote again
+      visit "/#{@poll.id}/voting"
+      choose "poll_answers_blue"
+      click_button "Vote"
+      expect(page).to have_text("You have already voted!")
     end
 
     scenario "votes for nothing", js: true do
@@ -47,6 +52,16 @@ RSpec.feature "Poll management - User" do
       click_button "Vote"
       expect(page).to have_text("blue 1")
       expect(page).to have_text("green 1")
+    end
+
+    scenario "votes multiple times" do
+      poll = FactoryGirl.create(:poll_allow_duplication)
+      (1..5).to_a.each do |i|
+        visit "/#{poll.id}/voting"
+        choose "poll_answers_blue"
+        click_button "Vote"
+        expect(page).to have_text("blue #{i}")
+      end
     end
   end
 end

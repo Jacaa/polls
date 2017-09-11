@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911102746) do
+ActiveRecord::Schema.define(version: 20170911145114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170911102746) do
     t.string "answers", default: [], array: true
     t.json "answers_with_values"
     t.boolean "allow_multiple", default: false
+    t.string "list_of_ip", default: [], array: true
+    t.boolean "allow_duplication", default: false
   end
 
 end

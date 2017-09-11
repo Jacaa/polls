@@ -9,5 +9,6 @@ RSpec.describe "home/index.html.haml" do
     expect(rendered).to have_selector("input[name='poll[question]']")
     expect(rendered).to have_selector("input[name='poll[answers][]']", count: 2)
     expect(rendered).to have_selector("input[name='poll[allow_multiple]']")
+    expect(rendered).to have_selector("input[name='poll[allow_duplication]']")
   end
 end

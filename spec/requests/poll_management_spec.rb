@@ -12,6 +12,7 @@ RSpec.describe "Poll management" do
       expect(poll.question).to eq("What's your favourite color?")
       expect(poll.answers).to eq([ "blue", "green" ])
       expect(poll.allow_multiple).to eq(false)
+      expect(poll.allow_duplication).to eq(false)
       follow_redirect!
       expect(response).to render_template(:edit)
       text = "Poll was successfully created."
@@ -42,9 +43,16 @@ RSpec.describe "Poll management" do
       patch "/#{@poll.id}/voting", params: { poll: { answers: answer } }
       expect(response).to redirect_to results_path(assigns(:poll))
       expect(assigns(:poll).answers_with_values[answer]).to eq(1)
+      expect(assigns(:poll).list_of_ip).to eq([request.remote_ip])
       follow_redirect!
       expect(response).to render_template(:show)
       expect(response.body).to include("Results")
+      # Try to vote again
+      get "/#{@poll.id}/voting"
+      patch "/#{@poll.id}/voting", params: { poll: { answers: answer } }
+      expect(assigns(:poll).answers_with_values[answer]).to eq(1)
+      expect(response).to render_template(partial: "_errors")
+      expect(response.body).to include("You have already voted!")
     end
 
     it "with no answer chosen" do
@@ -69,6 +77,22 @@ RSpec.describe "Poll management" do
       follow_redirect!
       expect(response).to render_template(:show)
       expect(response.body).to include("Results")
+    end
+
+    it "with allowing duplication" do
+      poll = FactoryGirl.create(:poll_allow_duplication)
+      answer = "blue"
+      (1..5).to_a.each do |i|
+        get "/#{poll.id}/voting"
+        expect(response).to render_template(:edit)
+        patch "/#{poll.id}/voting", params: { poll: { answers: answer } }
+        expect(response).to redirect_to results_path(assigns(:poll))
+        expect(assigns(:poll).answers_with_values[answer]).to eq(i)
+        expect(assigns(:poll).list_of_ip.size).to eq(0)
+        follow_redirect!
+        expect(response).to render_template(:show)
+        expect(response.body).to include("Results")
+      end
     end
   end
 end

@@ -2,7 +2,7 @@ class PollsController < ApplicationController
   include PollsHelper
 
   before_action :set_poll, only: [:edit, :show, :update]
-
+  before_action :check_duplication, only: :update
   # POST /polls
   def create
     @poll = Poll.new(poll_params)
@@ -45,6 +45,21 @@ class PollsController < ApplicationController
     end
 
     def poll_params
-      params.require(:poll).permit(:question, :allow_multiple, answers: [])
+      params.require(:poll).permit(:question, 
+                                   :allow_multiple, 
+                                   :allow_duplication, 
+                                   answers: [])
+    end
+
+    def check_duplication
+      unless @poll.allow_duplication
+        user_ip = request.remote_ip
+        if @poll.list_of_ip.include?(user_ip)
+          @poll.errors.add(:answers, "You have already voted!")
+          render partial: "errors"
+        else
+          @poll.list_of_ip << user_ip
+        end
+      end
     end
 end
