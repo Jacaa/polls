@@ -7,7 +7,11 @@ RSpec.describe "Poll management" do
       get "/"
       expect(response).to render_template(:index)
       post "/", params: { poll: FactoryGirl.attributes_for(:poll) }
-      expect(response).to redirect_to voting_path(assigns(:poll))
+      poll = assigns(:poll)
+      expect(response).to redirect_to voting_path(poll)
+      expect(poll.question).to eq("What's your favourite color?")
+      expect(poll.answers).to eq([ "blue", "green" ])
+      expect(poll.allow_multiple).to eq(false)
       follow_redirect!
       expect(response).to render_template(:edit)
       text = "Poll was successfully created."
@@ -25,7 +29,7 @@ RSpec.describe "Poll management" do
     end
   end
 
-  context "voting (edit created Poll)" do
+  context "voting" do
     
     before(:each) do
       @poll = FactoryGirl.create(:poll)
@@ -34,8 +38,10 @@ RSpec.describe "Poll management" do
     it "with one answer chosen" do
       get "/#{@poll.id}/voting"
       expect(response).to render_template(:edit)
-      patch "/#{@poll.id}/voting", params: { poll: { answers: "blue" } }
-      expect(response).to redirect_to results_path(@poll)
+      answer = "blue"
+      patch "/#{@poll.id}/voting", params: { poll: { answers: answer } }
+      expect(response).to redirect_to results_path(assigns(:poll))
+      expect(assigns(:poll).answers_with_values[answer]).to eq(1)
       follow_redirect!
       expect(response).to render_template(:show)
       expect(response.body).to include("Results")
@@ -48,6 +54,21 @@ RSpec.describe "Poll management" do
       expect(response).to render_template(partial: "_errors")
       text = "You need to choose an answer"
       expect(response.body).to include(text)
+    end
+
+    it "with multiple answers chosen" do
+      answers = [ "blue", "green" ]
+      poll = FactoryGirl.create(:poll_allow_multiple)
+      get "/#{poll.id}/voting"
+      expect(response).to render_template(:edit)
+      patch "/#{poll.id}/voting", params: { poll: { answers: answers } }
+      expect(response).to redirect_to results_path(assigns(:poll))
+      answers.each do |answer|
+        expect(assigns(:poll).answers_with_values[answer]).to eq(1)
+      end
+      follow_redirect!
+      expect(response).to render_template(:show)
+      expect(response.body).to include("Results")
     end
   end
 end

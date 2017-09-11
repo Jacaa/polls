@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  include PollsHelper
+
   before_action :set_poll, only: [:edit, :show, :update]
 
   # POST /polls
@@ -24,13 +26,13 @@ class PollsController < ApplicationController
   
   # PATCH /polls/:id
   def update
-    choosen_answer = params[:poll][:answers]
+    choosen_answers = normalize params[:poll][:answers]
     respond_to do |format|
-      if choosen_answer.empty?
+      if choosen_answers.empty?
         @poll.errors.add(:answers, "You need to choose an answer")
         format.js { render partial: "errors" }
       else
-        @poll.answers_with_values[choosen_answer] += 1
+        choosen_answers.each { |answer| @poll.answers_with_values[answer] += 1 }
         @poll.save
         format.html { redirect_to results_path(@poll) }
       end
@@ -43,6 +45,6 @@ class PollsController < ApplicationController
     end
 
     def poll_params
-      params.require(:poll).permit(:question, answers: [])
+      params.require(:poll).permit(:question, :allow_multiple, answers: [])
     end
 end

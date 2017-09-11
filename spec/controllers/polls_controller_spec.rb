@@ -66,7 +66,7 @@ RSpec.describe PollsController do
         }.to_not change(Poll, :count)
       end
       
-      it "renders the :create (errors) template" do
+      it "renders the errors partial" do
         params = { poll: FactoryGirl.attributes_for(:invalid_poll) }
         post :create, params: params, xhr: true
         expect(response).to render_template(partial: "_errors")
@@ -85,13 +85,14 @@ RSpec.describe PollsController do
       it "changes the database record" do
         answer = "blue"
         patch :update, params: { id: @id, poll: { answers: answer } }
-        expect(assigns(:poll).answers_with_values[answer]).to eq(1)
+        updated = assigns(:poll)
+        expect(updated.answers_with_values).to_not eq(@poll.answers_with_values)
       end
       
       it "redirects to the :show page" do
         answer = "blue"
         patch :update, params: { id: @id, poll: { answers: answer } }
-        expect(response).to redirect_to results_path(@poll)
+        expect(response).to redirect_to results_path(assigns(:poll))
       end
     end
 
@@ -103,10 +104,31 @@ RSpec.describe PollsController do
         expect(updated.answers_with_values).to eq(@poll.answers_with_values)
       end
 
-      it "renders the :update (errors) template" do
+      it "renders the errors partial" do
         answer = ""
         patch :update, params: { id: @id, poll: { answers: answer } }, xhr: true
         expect(response).to render_template(partial: "_errors")
+      end
+    end
+
+    context "with multiple answers" do
+
+      before(:each) do
+        @poll = FactoryGirl.create(:poll_allow_multiple)
+        @id = @poll.id
+      end
+
+      it "changes the database record" do
+        answers = [ "blue", "green" ]
+        patch :update, params: { id: @id, poll: { answers: answers } }
+        updated = assigns(:poll)
+        expect(updated.answers_with_values).to_not eq(@poll.answers_with_values)
+      end
+
+      it "redirects to the :show page" do
+        answers = [ "blue", "green" ]
+        patch :update, params: { id: @id, poll: { answers: answers } }
+        expect(response).to redirect_to results_path(assigns(:poll))
       end
     end
   end

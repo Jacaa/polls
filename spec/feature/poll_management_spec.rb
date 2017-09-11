@@ -38,5 +38,15 @@ RSpec.feature "Poll management - User" do
       click_button "Vote"
       expect(page).to have_text("You need to choose an answer")
     end
+
+    scenario "votes for multiple answers" do
+      poll = FactoryGirl.create(:poll_allow_multiple)
+      visit "/#{poll.id}/voting"
+      check "poll_answers_blue"
+      check "poll_answers_green"
+      click_button "Vote"
+      expect(page).to have_text("blue 1")
+      expect(page).to have_text("green 1")
+    end
   end
 end
