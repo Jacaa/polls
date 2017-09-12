@@ -18,6 +18,15 @@ class PollsController < ApplicationController
 
   # GET /polls/:id
   def show
+    # Refactor it!
+    @total_votes = 0
+    @poll.answers_with_values.each do |answer, value|
+      @total_votes += value
+    end
+    @percentages = {}
+    @poll.answers_with_values.each do |answer, value|
+      @percentages[answer] = (value*100.0/@total_votes).round(2)
+    end
   end
   
   # GET /polls/:id/edit

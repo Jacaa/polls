@@ -4,4 +4,10 @@
     %title Poll
     = render 'layouts/default'
   %body
-    = yield
+  .container
+    .row
+      .text-center
+        %a#root{href: root_path}
+          %h1#header Create real-time polls!
+          %button.create-btn Create new poll
+      = yield

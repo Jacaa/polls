@@ -1,2 +1,252 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Lobster|Varela+Round');
+
+/* colors */
+$dark-grey:   #3E3E3E;
+$dark-green:  #3DA035;
+$green:       #4CC641;
+$white:       #DDDDDD;
+$light-grey:  #adafad;
+$error-dark:  #F36026;
+$error-light: #FFd3d3;
+
+body {
+  min-height: 100vh;
+  background-color: $dark-grey;
+  font-family: 'Varela Round', sans-serif;
+  letter-spacing: 0.5px;
+  color: $dark-grey;
+  font-size: 16px;
+}
+
+.btn.btn-default:active, .btn.btn-default:focus {
+  background-color: $white;
+  color: $green;
+  border-color: $green;
+  outline: none;
+  box-shadow: none;
+}
+
+.green-btn, .clear-btn, .create-btn {
+  background-color: $green;
+  font-weight: bold;
+  font-size: 16px;
+  color: $white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 2px solid $green;
+  &:hover {
+    background-color: $white;
+    border: 2px solid $green;
+    color: $dark-green;
+  }
+  &:focus, &:active {
+    outline: none;
+    background-color: $white;
+    color: $dark-green;
+    border-color: $green;
+  }
+
+}
+
+.clear-btn, .create-btn {
+  padding: 6px 12px;
+  border-color: $light-grey;
+  background-color: $white;
+  color: $light-grey;
+  font-weight: normal;
+}
+
+.create-btn {
+  background-color: $dark-grey;
+  border-color: $white;
+  color: $white;
+  &:hover {
+    border-color: $green;
+    color: $green;
+    background-color: $dark-grey;
+  }
+}
+
+input[type=submit] {
+  margin-right: 50px;
+}
+
+
+#root {
+  text-decoration: none;
+}
+
+#header {
+  margin-top: 60px;
+  color: $green;
+  font-family: 'Lobster', cursive;
+}
+
+.form-container, .results-container {
+  width: 70%;
+  background-color: $white;
+  padding: 20px 50px;
+  margin: 30px auto;
+  border-left: 10px solid $green;
+  min-width: 350px;
+}
+
+
+.form-control {
+  background-color: $white;
+  color: $dark-grey;
+  border: 2px solid $light-grey;
+  box-shadow: none;
+  border-radius: 10px;
+  height: 40px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  &:focus {
+    box-shadow: none;
+    border-color: $green;
+  }
+}
+
+#poll_question {
+  height: 50px;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.errors {
+  ul {
+    border-radius: 10px;
+    text-align: center;
+    font-style: italic;
+    color: $error-dark;
+    padding: 20px;
+    border: 1px solid $error-dark;
+    list-style: none;
+    background-color: $error-light;
+  }
+}
+
+#question {
+  font-size: 24px;
+  font-style: italic;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid $green;
+}
+
+.info {
+  color: $white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: $green;
+  margin-bottom: 20px;
+}
+
+.answer {
+  margin-top: 25px;
+  border-bottom: 1px dashed $light-grey;
+  padding-bottom: 5px;
+  .value{
+    float: right;
+  }
+  .text, .value {
+    display: inline-block;
+    padding: 0;
+  }
+}
+
+#total {
+  margin-top: 10px;
+  color: $dark-green;
+}
+
+span.percentage {
+  color: $green;
+  letter-spacing: 0;
+}
+
+.filled {
+  height: 25px;
+  background-color: $green;
+}
+
+
+/* checkboxes and radio buttons */
+
+.checkbox input[type=checkbox], .radio input[type=radio] {
+  opacity: 0;
+}
+
+.checkbox, .radio {
+  padding-left: 30px;
+  margin-bottom: 25px;
+  border-bottom: 1px dashed $light-grey;
+  padding-bottom: 5px;
+  label {
+    padding-left: 0px;
+  }
+}
+
+.options .checkbox {
+  border: none;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.checkbox label::before, .radio label::before{
+  content: "";
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border: 2px solid $light-grey;
+}
+
+.checkbox label::after, .radio label::after {
+  content: "";
+  display: inline-block;
+  height: 10px;
+  width: 20px;
+  border-left: 4px solid $dark-green;
+  border-bottom: 4px solid $dark-green;
+  transform: rotate(-45deg);
+}
+
+.checkbox label, .radio label {
+  position: relative;
+}
+.checkbox label::before, .checkbox label::after,
+.radio label::before, .radio label::after {
+  position: absolute;
+}
+/*Outer-box*/
+.checkbox label::before, .radio label::before {
+  left: -30px;
+
+}
+/*Checkmark*/
+.checkbox label::after, .radio label::after {
+  left: -27px;
+}
+  /*Hide the checkmark by default*/
+.checkbox input[type=checkbox] + label::after,
+.radio input[type=radio] + label::after {
+  content: none;
+}
+/*Unhide the checkmark on the checked state*/
+.checkbox input[type=checkbox]:checked + label::after,
+.radio input[type=radio]:checked + label::after {
+  content: "";
+}
+
+/* media */
+
+@media only screen and (max-width: 767px) {
+
+  .form-container, .results-container {
+    padding: 20px 20px;
+  }
+}

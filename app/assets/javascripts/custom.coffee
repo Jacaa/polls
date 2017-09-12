@@ -6,3 +6,11 @@ $(document).on 'keyup', 'input[name="poll[answers][]"]:last', ->
                        placeholder='enter new answer...'
                        value='' name='poll[answers][]' id='" + id + "'>" 
   $(".poll_answers").append(new_answer_input)
+
+$(document).on 'turbolinks:load', ->
+  
+  $('.filled').each ->
+    width = $(@).attr('id')
+    $(@).css("width", width + '%')
+    opacity = width/100
+    $(@).css("opacity", opacity)

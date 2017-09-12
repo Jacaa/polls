@@ -1,0 +1,15 @@
+= simple_form_for(@poll, url: update_path(@poll), 
+                        remote: true, 
+                        defaults: { label: false }) do |form|
+  #question= @poll.question
+  - if @poll.allow_multiple
+    .info Choose one or more answers:
+    = form.input :answers, collection: @poll.answers, as: :check_boxes,
+                          checked: false
+  - else
+    .info Choose one answer:
+    = form.input :answers, collection: @poll.answers, as: :radio_buttons
+  .text-center
+    = form.button :submit, "Vote", class: "green-btn"
+    %a{href: results_path(@poll)}
+      %button.clear-btn See results

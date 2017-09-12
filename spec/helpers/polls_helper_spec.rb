@@ -8,6 +8,8 @@ RSpec.describe PollsHelper do
       it "create an array of choosen answer" do
         answer = "blue"
         expect(normalize(answer)).to eq(["blue"])
+        answer = "blue and green"
+        expect(normalize(answer)).to eq(["blue and green"])
       end
     end
 

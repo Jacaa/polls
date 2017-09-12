@@ -1,7 +1,20 @@
-%p.notice
-  = notice
-  Results
+.results-container
+  #question= @poll.question
   - @poll.answers_with_values.each do |answer, value|
-    %h2
-      = answer
-      = value
+    .answer
+      .text
+        = answer
+      .value
+        = pluralize(value, 'vote')
+        (
+        %span.percentage
+          = @percentages[answer]
+          = '%'
+        )
+    .filled{id: "#{@percentages[answer]}"}
+  #total
+    Total votes - 
+    = @total_votes
+  .text-center
+    %a{href: voting_path(@poll)}
+      %button.clear-btn Go to voting

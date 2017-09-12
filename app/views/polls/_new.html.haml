@@ -5,6 +5,10 @@
                                  autocomplete: "off"       }) do |form|
   = form.input :question, placeholder: "write your question here"
   = form.input :answers, as: :array
-  = form.input :allow_multiple, as: :boolean, label: "Allow multiple answers"
-  = form.input :allow_duplication, as: :boolean, label: "Allow duplication"
-  = form.button :submit, "Create poll"
+  .options
+    = form.input :allow_multiple, as: :boolean, label: "Allow multiple answers"
+    = form.input :allow_duplication, as: :boolean, label: "Allow multiple votes from a single IP"
+  .text-center
+    = form.button :submit, "Create poll", class: "green-btn"
+    %a{href: root_path}
+      %button.clear-btn Clear
