@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "polls/edit.html.haml" do
   
-  it "voting page" do
+  it "displays inputs as radio buttons" do
     poll = FactoryGirl.create(:poll)
     assign(:poll, poll)
     render
@@ -13,7 +13,7 @@ RSpec.describe "polls/edit.html.haml" do
     end
   end
 
-  it "voting page - multiple answers" do
+  it "displays inputs as checkboxes" do
     poll = FactoryGirl.create(:poll_allow_multiple)
     assign(:poll, poll)
     render

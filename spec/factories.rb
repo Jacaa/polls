@@ -9,10 +9,6 @@ FactoryGirl.define do
       answers [ "","" ]
     end
     
-    factory :poll_with_results do
-      answers_with_values {{ "blue": 3, "green": 2}}
-    end
-
     factory :poll_allow_multiple do
       allow_multiple true
     end

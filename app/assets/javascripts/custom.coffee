@@ -1,5 +1,6 @@
 # Create new input after 'keyup' action
 $(document).on 'keyup', 'input[name="poll[answers][]"]:last', ->
+
   number_of_next_inputs = $('input[name="poll[answers][]"]').length + 1
   id = 'poll_answers_' + number_of_next_inputs
   new_answer_input = "<input class='form-control' type='string'
@@ -9,8 +10,13 @@ $(document).on 'keyup', 'input[name="poll[answers][]"]:last', ->
 
 $(document).on 'turbolinks:load', ->
   
+  # Set width of every .filled div
   $('.filled').each ->
     width = $(@).attr('id')
     $(@).css("width", width + '%')
     opacity = width/100
     $(@).css("opacity", opacity)
+  
+  # Focus poll_question input
+  $(@).find('#poll_question').focus()
+

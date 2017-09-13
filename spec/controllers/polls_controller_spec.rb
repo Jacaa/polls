@@ -6,6 +6,8 @@ RSpec.describe PollsController do
     
     before(:each) do
       @poll = FactoryGirl.create(:poll)
+      @poll.answers_with_values = { "blue": 4, "green": 6 }
+      @poll.save
       @id = @poll.id
     end
 
@@ -17,6 +19,24 @@ RSpec.describe PollsController do
     it "renders the show template" do
       get :show, params: { id: @id }
       expect(response).to render_template(:show)
+    end
+
+    it "assigns @total_votes variable" do
+      get :show, params: { id: @id }
+      expect(assigns(:total_votes)).to eql(10)
+    end
+
+    it "assigns @percentages variable" do
+      get :show, params: { id: @id }
+      percentages = assigns(:percentages)
+      expect(percentages["blue"]).to eql(40.0)
+      expect(percentages["green"]).to eql(60.0)
+    end
+
+    it "assigns sorted by values @poll" do
+      get :show, params: { id: @id }
+      poll = assigns(:poll)
+      expect(poll.answers_with_values.keys.first).to eq("green")
     end
   end
   

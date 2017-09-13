@@ -27,4 +27,8 @@ class Poll < ApplicationRecord
       self.answers_with_values[answer] = 0
     end
   end
+
+  def sort_answers_by_values
+    self.answers_with_values = self.answers_with_values.sort_by { |k, v| v }.reverse.to_h
+  end
 end
