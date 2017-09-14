@@ -18,3 +18,11 @@
   .text-center
     %a{href: voting_path(@poll)}
       %button.clear-btn Go to voting
+
+  -# Chart data
+  = content_tag(:div, '', id: "poll-chart", 
+                          data: { votes: @poll.answers_with_values.values,
+                                  answers: @poll.answers_with_values.keys,
+                                  percentages: @percentages.values })
+.chart
+  %canvas#resultChart

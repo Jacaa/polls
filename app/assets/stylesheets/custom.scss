@@ -97,7 +97,7 @@ input[type=submit] {
 #header {
   color: $green;
   font-family: 'Lobster', cursive;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 /* forms */
@@ -133,6 +133,10 @@ input[type=submit] {
   min-width: 350px;
   padding: 20px 50px;
   width: 70%;
+}
+
+.results-container {
+  float: left;
 }
 
 /* edit and show view */
@@ -186,6 +190,16 @@ span.percentage {
   background-color: $green;
   height: 25px;
 }
+
+/* chart */
+.chart {
+  width: 250px;
+  height: 250px;
+  margin-top: 30px;
+  float: right;
+  background-color: $dark-grey;
+}
+
 
 /* checkboxes and radio buttons */
 

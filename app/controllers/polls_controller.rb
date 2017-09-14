@@ -18,9 +18,9 @@ class PollsController < ApplicationController
 
   # GET /polls/:id
   def show
+    @poll.sort_answers_by_values
     @total_votes = all_votes_for @poll
     @percentages = count_percentages @poll
-    @poll.sort_answers_by_values
   end
   
   # GET /polls/:id/edit
