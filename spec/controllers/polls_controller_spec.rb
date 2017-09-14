@@ -29,8 +29,8 @@ RSpec.describe PollsController do
     it "assigns @percentages variable" do
       get :show, params: { id: @id }
       percentages = assigns(:percentages)
-      expect(percentages["blue"]).to eql(40.0)
-      expect(percentages["green"]).to eql(60.0)
+      expect(percentages["blue"]).to eql('40.0%')
+      expect(percentages["green"]).to eql('60.0%')
     end
 
     it "assigns sorted by values @poll" do

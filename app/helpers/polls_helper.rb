@@ -23,9 +23,9 @@ module PollsHelper
     number_of_votes = all_votes_for poll
     poll.answers_with_values.each do |answer, value|
       if number_of_votes == 0
-        percentages[answer] = 0
+        percentages[answer] = '0%'
       else
-        percentages[answer] = (value * 100.0 / number_of_votes).round(2)
+        percentages[answer] = ((value * 100.0 / number_of_votes).round(2)).to_s + '%'
       end
     end
     return percentages

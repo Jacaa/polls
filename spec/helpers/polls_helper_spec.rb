@@ -35,13 +35,12 @@ RSpec.describe PollsHelper do
       poll = FactoryGirl.create(:poll)
       poll.answers_with_values = {"blue": 0, "green": 0}
       percentages = count_percentages(poll)
-      expect(percentages["blue"]).to eq(0)
-      expect(percentages["green"]).to eq(0)
+      expect(percentages["blue"]).to eq('0%')
+      expect(percentages["green"]).to eq('0%')
       poll.answers_with_values = {"blue": 3, "green": 2}
       percentages = count_percentages(poll)
-      puts percentages
-      expect(percentages["blue"]).to eq(60.0)
-      expect(percentages["green"]).to eq(40.0)
+      expect(percentages["blue"]).to eq('60.0%')
+      expect(percentages["green"]).to eq('40.0%')
     end
   end
 end

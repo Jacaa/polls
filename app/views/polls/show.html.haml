@@ -24,5 +24,9 @@
                           data: { votes: @poll.answers_with_values.values,
                                   answers: @poll.answers_with_values.keys,
                                   percentages: @percentages.values })
+-# TODO LAYOUT
 .chart
   %canvas#resultChart
+
+%a{href: results_path(@poll)}
+  %button.create-btn#refresh Refresh Results
