@@ -7,16 +7,16 @@ default: &default
 
 development:
   <<: *default
-  database: polls_development
+  database: <%= ENV['POLLS_DATABASE'] %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
 
 test:
   <<: *default
-  database: polls_test
+  database: <%= ENV['POLLS_DATABASE'] %>
 
 production:
   <<: *default
-  database: polls_production
-  username: polls
+  database: <%= ENV['POLLS_DATABASE'] %>
+  username: <%= ENV['POLLS_DATABASE_USERNAME'] %>
   password: <%= ENV['POLLS_DATABASE_PASSWORD'] %>
