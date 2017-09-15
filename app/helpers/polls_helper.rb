@@ -30,4 +30,9 @@ module PollsHelper
     end
     return percentages
   end
+
+  def set_cookie(poll)
+    cookies[:last_question] = poll.question
+    cookies[:last_link] = "/#{poll.id}/results"
+  end
 end

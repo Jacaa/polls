@@ -76,6 +76,13 @@ RSpec.describe PollsController do
         post :create, params: { poll: FactoryGirl.attributes_for(:poll) }
         expect(response).to redirect_to voting_path(assigns(:poll))
       end
+
+      it "sets cookies with last created poll" do
+        post :create, params: { poll: FactoryGirl.attributes_for(:poll) }
+        poll = assigns(:poll)
+        expect(response.cookies['last_question']).to eq(poll.question)
+        expect(response.cookies['last_link']).to eq("/#{poll.id}/results")
+      end
     end
 
     context "with invalid attribute" do

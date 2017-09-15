@@ -9,6 +9,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       if @poll.save
         notice = 'Poll was successfully created.'
+        set_cookie @poll
         format.html { redirect_to voting_path(@poll), notice: notice }
       else
         format.js { render partial: "errors" }

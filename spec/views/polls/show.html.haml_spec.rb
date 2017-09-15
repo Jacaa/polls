@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "polls/show.html.haml" do
   
-  it "displays answers with values, percentages and total number of votes" do
+  it "displays answers with values, percentages, total votes and chart" do
     poll = FactoryGirl.create(:poll)
     percentages = { "blue": 60, "green": 40 }
     poll.answers_with_values = { "blue": 3, "green": 2}
@@ -17,5 +17,6 @@ RSpec.describe "polls/show.html.haml" do
       expect(rendered).to contain(percentages[answer])
     end
     expect(rendered).to match(/total/)
+    expect(rendered).to have_selector("canvas#resultChart")
   end
 end

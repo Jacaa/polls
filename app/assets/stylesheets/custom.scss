@@ -11,6 +11,7 @@ $white:       #DDDDDD;
 $light-grey:  #adafad;
 $error-font:  #F36026;
 $error-bgnd:  rgba(255, 211, 211, 0.5);
+$black:       #000000;
 
 body {
   background-color: $dark-grey;
@@ -133,7 +134,7 @@ input[type=submit] {
 .form-container, .results-container {
   background-color: $white;
   border-left: 10px solid $green;
-  margin: 30px auto;
+  margin: 30px auto 0 auto;
   min-width: 350px;
   padding: 20px 50px;
   width: 70%;
@@ -141,6 +142,27 @@ input[type=submit] {
 
 .results-container {
   float: left;
+}
+
+#last-poll {
+  padding: 0px 60px;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 5px $black;
+  margin-top: 0;
+  background-color: $dark-grey;
+  border-left: none;
+  a {
+    text-decoration: none;
+    color: $white;
+    &:hover {
+      color: $green;
+    }
+  }
+  p {
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 0;
+  }
 }
 
 /* edit and show view */
@@ -282,5 +304,9 @@ span.percentage {
 
   .form-container, .results-container {
     padding: 20px 20px;
+  }
+
+  #last-poll {
+    padding: 5px 30px;
   }
 }
