@@ -32,7 +32,7 @@ module PollsHelper
   end
 
   def set_cookie(poll)
-    cookies[:last_question] = poll.question
-    cookies[:last_link] = "/#{poll.id}/results"
+    cookies.permanent[:last_question] = poll.question
+    cookies.permanent[:last_link] = "/#{poll.id}/results"
   end
 end

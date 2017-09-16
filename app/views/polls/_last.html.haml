@@ -1,5 +1,3 @@
 - unless cookies[:last_link].nil?
   %a{href: cookies[:last_link]}
-    %p
-      Last poll:
-      = cookies[:last_question]
+    %button.dark-btn#last-poll My last poll

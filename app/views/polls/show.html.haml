@@ -17,16 +17,16 @@
     = @total_votes
   .text-center
     %a{href: voting_path(@poll)}
-      %button.clear-btn Go to voting
+      %button.light-btn Go to voting
 
   -# Chart data
   = content_tag(:div, '', id: "poll-chart", 
                           data: { votes: @poll.answers_with_values.values,
                                   answers: @poll.answers_with_values.keys,
                                   percentages: @percentages.values })
--# TODO LAYOUT
-.chart
-  %canvas#resultChart
-
-%a{href: results_path(@poll)}
-  %button.create-btn#refresh Refresh Results
+.chart-container
+  .chart
+    %canvas#resultChart
+  .text-center
+    %a{href: results_path(@poll)}
+      %button.dark-btn#refresh Refresh results

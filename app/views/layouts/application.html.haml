@@ -9,5 +9,6 @@
       .text-center
         %a#root{href: root_path}
           %h1#header Create real-time polls!
-          %button.create-btn Create new poll
+          %button.dark-btn Create new poll
+          = render 'polls/last'
       = yield

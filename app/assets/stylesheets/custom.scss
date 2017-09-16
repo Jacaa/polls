@@ -5,8 +5,7 @@
 /* colors */
 
 $dark-grey:   #3E3E3E;
-$dark-green:  #3DA035;
-$green:       #4CC641;
+$green:       #359E2C;
 $white:       #DDDDDD;
 $light-grey:  #adafad;
 $error-font:  #F36026;
@@ -32,7 +31,7 @@ body {
   outline: none;
 }
 
-.green-btn, .clear-btn, .create-btn {
+.green-btn, .light-btn, .dark-btn {
   background-color: $green;
   border: 2px solid $green;
   border-radius: 20px;
@@ -43,17 +42,17 @@ body {
   &:hover {
     background-color: $white;
     border: 2px solid $green;
-    color: $dark-green;
+    color: $green;
   }
   &:focus, &:active {
     background-color: $white;
     border-color: $green;
-    color: $dark-green;
+    color: $green;
     outline: none;
   }
 }
 
-.clear-btn, .create-btn {
+.light-btn, .dark-btn {
   background-color: $white;
   border-color: $light-grey;
   color: $light-grey;
@@ -61,7 +60,7 @@ body {
   padding: 6px 12px;
 }
 
-.create-btn {
+.dark-btn {
   background-color: $dark-grey;
   border-color: $white;
   color: $white;
@@ -72,8 +71,8 @@ body {
   }
 }
 
-#refresh {
-  margin: 20px 80px;
+#last-poll {
+  margin-left: 35px;
 }
 
 input[type=submit] {
@@ -129,12 +128,12 @@ input[type=submit] {
   height: 50px;
 }
 
-/* main page */
+/* containers */
 
 .form-container, .results-container {
   background-color: $white;
   border-left: 10px solid $green;
-  margin: 30px auto 0 auto;
+  margin: 30px auto;
   min-width: 350px;
   padding: 20px 50px;
   width: 70%;
@@ -142,27 +141,13 @@ input[type=submit] {
 
 .results-container {
   float: left;
+  width: 70%;
 }
 
-#last-poll {
-  padding: 0px 60px;
-  margin-bottom: 15px;
-  box-shadow: 1px 1px 5px $black;
-  margin-top: 0;
-  background-color: $dark-grey;
-  border-left: none;
-  a {
-    text-decoration: none;
-    color: $white;
-    &:hover {
-      color: $green;
-    }
-  }
-  p {
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 0;
-  }
+.chart-container {
+  float: right;
+  margin: 30px 15px 0 0;
+  width: 25%;
 }
 
 /* edit and show view */
@@ -202,7 +187,7 @@ input[type=submit] {
 }
 
 #total {
-  color: $dark-green;
+  color: $green;
   margin-bottom: 10px;
   margin-top: 10px;
 }
@@ -217,15 +202,19 @@ span.percentage {
   height: 25px;
 }
 
-/* chart */
 .chart {
-  width: 250px;
-  height: 250px;
-  margin-top: 30px;
-  float: right;
+  box-shadow: 1px 1px 5px $black;
   background-color: $dark-grey;
+  max-height: 250px;
+  max-width: 250px;
+  padding: 20px;
 }
 
+.chart-container .text-center {
+  max-height: 250px;
+  max-width: 250px;
+  padding: 20px 0;
+}
 
 /* checkboxes and radio buttons */
 
@@ -263,8 +252,8 @@ span.percentage {
 
 .checkbox label::after, .radio label::after {
   content: "";
-  border-bottom: 4px solid $dark-green;
-  border-left: 4px solid $dark-green;
+  border-bottom: 4px solid $green;
+  border-left: 4px solid $green;
   display: inline-block;
   height: 10px;
   transform: rotate(-45deg);
@@ -304,6 +293,22 @@ span.percentage {
 
   .form-container, .results-container {
     padding: 20px 20px;
+    width: 100%;
+  }
+  
+  .chart-container {
+    width: 100%;
+    margin: 0;
+    .text-center {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+    }
+    .chart {
+      margin: auto;
+      height: 250px;
+      width: 250px;
+    }
   }
 
   #last-poll {

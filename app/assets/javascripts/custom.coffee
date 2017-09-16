@@ -14,15 +14,15 @@ $(document).on 'turbolinks:load', ->
   $(@).find('#poll_question').focus()
 
   if window.location.pathname.match('results')
-    colors = ['#4cc641', # green
-              '#41a6c6', # cyan
-              '#c64141', # red
-              '#c69541', # orange
+    colors = ['#359e2c', # green
+              '#2c7f9e', # cyan
+              '#9e2c2c', # red
+              '#af6401', # orange
               '#6b6b6b', # dark grey
-              '#888888', # meduim grey
+              '#888888', # medium grey
               '#b5b5b5'] # light grey
 
-    # If there are more answers than 7 add very light grey color for it
+    # If there are more answers than 7 set their color to very light grey
     filled_divs = $('.filled')
     if filled_divs.length > 6
       for i in [1...(filled_divs.length-6)]
@@ -45,7 +45,7 @@ $(document).on 'turbolinks:load', ->
           
           backgroundColor: colors
           borderColor: '#3E3E3E'
-          borderWidth: 5
+          borderWidth: 2
         } ]
       options:
         legend:
