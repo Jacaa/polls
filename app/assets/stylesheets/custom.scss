@@ -171,6 +171,10 @@ input[type=submit] {
   padding: 5px;
 }
 
+.edit_poll label {
+  word-break: break-all;
+}
+
 /* show view */
 
 .answer {
@@ -180,7 +184,8 @@ input[type=submit] {
   .value{
     float: right;
   }
-  .text, .value {
+  .text {
+    word-break: break-all;
     display: inline-block;
     padding: 0;
   }
@@ -242,7 +247,7 @@ span.percentage {
 }
 
 /* create custom checkbox */
-.checkbox label::before, .radio label::before{
+.checkbox label::before, .radio label::before {
   content: "";
   border: 2px solid $light-grey;
   display: inline-block;
@@ -250,42 +255,25 @@ span.percentage {
   width: 20px;
 }
 
-.checkbox label::after, .radio label::after {
+.checkbox input[type=checkbox]:checked + label::before, 
+.radio input[type=radio]:checked + label::before {
   content: "";
-  border-bottom: 4px solid $green;
-  border-left: 4px solid $green;
-  display: inline-block;
-  height: 10px;
-  transform: rotate(-45deg);
-  width: 20px;
+  border-color: $green;
+  background: $green;
+  box-shadow: inset -2px 0px 0px 0px $white, inset 2px 0px 0px 0px $white,
+              inset 0px -2px 0px 0px $white, inset 0px 2px 0px 0px $white;
 }
 
 .checkbox label, .radio label {
   position: relative;
 }
-.checkbox label::before, .checkbox label::after,
-.radio label::before, .radio label::after {
+.checkbox label::before, .radio label::before {
   position: absolute;
 }
 
 .checkbox label::before, .radio label::before {
   left: -30px;
 }
-
-.checkbox label::after, .radio label::after {
-  left: -27px;
-}
-
-.checkbox input[type=checkbox] + label::after,
-.radio input[type=radio] + label::after {
-  content: none;
-}
-
-.checkbox input[type=checkbox]:checked + label::after,
-.radio input[type=radio]:checked + label::after {
-  content: "";
-}
-
 
 /* media */
 

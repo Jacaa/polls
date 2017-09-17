@@ -4,13 +4,13 @@
     .answer
       .text
         = answer
-      .value
-        = pluralize(value, 'vote')
-        (
-        %span.percentage
-          = @percentages[answer]
-          = '%'
-        )
+        %span.value
+          = pluralize(value, 'vote')
+          (
+          %span.percentage
+            = @percentages[answer]
+            = '%'
+          )
     .filled{id: "#{@percentages[answer]}"}
   #total
     Total votes - 
