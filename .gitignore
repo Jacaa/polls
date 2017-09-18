@@ -19,7 +19,6 @@
 .byebug_history
 
 package.json
-.rspec
 Gemfile.lock
 
 # Ignore application configuration
