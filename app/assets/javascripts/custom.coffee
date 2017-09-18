@@ -9,6 +9,9 @@ $(document).on 'keyup', 'input[name="poll[answers][]"]:last', ->
   $(".poll_answers").append(new_answer_input)
 
 $(document).on 'turbolinks:load', ->
+  
+  # Change cookies info
+  $('.cookies-eu-content-holder').text('This website uses cookies. By continuing to use this site you agree to the use of cookies.')
 
   # Focus poll_question input
   $(@).find('#poll_question').focus()

@@ -10,6 +10,6 @@ RSpec.describe "home/index.html.haml" do
     expect(rendered).to have_selector("input[name='poll[answers][]']", count: 2)
     expect(rendered).to have_selector("input[name='poll[allow_multiple]']")
     expect(rendered).to have_selector("input[name='poll[allow_duplication]']")
-    expect(rendered).to have_selector("div#last-poll")
+    expect(rendered).to have_selector("div#last-poll") if cookies[:last_link]
   end
 end

@@ -185,6 +185,7 @@ input[type=submit] {
     float: right;
   }
   .text {
+    width: 100%;
     word-break: break-all;
     display: inline-block;
     padding: 0;
@@ -219,6 +220,38 @@ span.percentage {
   max-height: 250px;
   max-width: 250px;
   padding: 20px 0;
+}
+
+/* cookies view */
+
+.cookies-eu-container {
+  color: $white;
+  text-align: justify;
+  .text-center {
+    margin-top: 15px;
+  }
+}
+
+.cookies-eu {
+  background-color: $white;
+  color: $dark-grey;
+  border-color: $green;
+  position: static;
+}
+
+.cookies-eu .cookies-eu-button-holder .cookies-eu-ok {
+  background-color: $green;
+  border: 2px solid $green;
+  border-radius: 20px;
+  color: $white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 20px;
+  &:hover {
+    background-color: $white;
+    border: 2px solid $green;
+    color: $green;
+  }
 }
 
 /* checkboxes and radio buttons */

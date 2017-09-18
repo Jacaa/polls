@@ -21,4 +21,16 @@ RSpec.describe HomeController do
       expect(assigns(:poll)).to be_a(Poll)
     end
   end
+
+  describe "GET #cookies" do
+    it "return http success" do
+      get :cookies_eu
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the cookies template" do
+      get :cookies_eu
+      expect(response).to render_template(:cookies_eu)
+    end
+  end
 end

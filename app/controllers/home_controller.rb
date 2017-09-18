@@ -7,4 +7,7 @@ class HomeController < ApplicationController
   def index
     @poll = Poll.new(answers: ['',''])
   end
+
+  def cookies_eu
+  end
 end
